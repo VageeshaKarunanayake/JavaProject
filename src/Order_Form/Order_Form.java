@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.sql.*;
 import javax.swing.JFileChooser;
+import javax.swing.event.*;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
     
@@ -39,7 +40,7 @@ public class Order_Form extends javax.swing.JFrame {
         Order_Type = new javax.swing.JLabel();
         Customer_ID = new javax.swing.JLabel();
         Product_ID = new javax.swing.JLabel();
-        Qunatity = new javax.swing.JLabel();
+        Quantity = new javax.swing.JLabel();
         Order_Files = new javax.swing.JLabel();
         Order_Status = new javax.swing.JLabel();
         Discount = new javax.swing.JLabel();
@@ -59,10 +60,49 @@ public class Order_Form extends javax.swing.JFrame {
         Order_Type_Input.addItem("Purchasing Order");
         Order_Type_Input.setSelectedIndex(-1);
         Quantity_Input = new javax.swing.JTextField();
+        DocumentListener documentListener = new DocumentListener() {
+            public void changedUpdate(DocumentEvent documentEvent) {
+
+            }
+            public void insertUpdate(DocumentEvent documentEvent) {
+
+                String qty = Quantity_Input.getText();
+                String dis = Discount_Input.getText();
+                String UnP = jLabel9.getText();
+                Double UnPrice = Double.parseDouble(UnP);
+                Double total = null;
+
+                if((qty.equals("")) && (dis.equals("")))
+                total = (Double) UnPrice;
+                else if(dis.equals("")){
+                    Integer qtyInt = Integer.parseInt(qty);
+                    total = (Double) UnPrice * qtyInt;
+                }
+                else if(qty.equals("")){
+                    Double disDou = Double.parseDouble(dis);
+                    total = (Double) UnPrice * ((100 - disDou)/100);
+                }
+
+                else{
+                    Integer qtyInt = Integer.parseInt(qty);
+                    Double disDou = Double.parseDouble(dis);
+                    total = (Double) UnPrice * qtyInt * ((100 - disDou)/100);
+                }
+
+                jLabel1.setText(Double.toString(total));
+
+            }
+            public void removeUpdate(DocumentEvent documentEvent) {
+
+            }
+        };
+
+        Quantity_Input.getDocument().addDocumentListener(documentListener);
         Search_Button = new javax.swing.JButton();
         File = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Discount_Input = new javax.swing.JTextField();
+        Discount_Input.getDocument().addDocumentListener(documentListener);
         Order_Status_Input = new javax.swing.JComboBox<>();
         AutoCompleteDecorator.decorate(Order_Status_Input);
         jLabel3 = new javax.swing.JLabel();
@@ -137,11 +177,36 @@ public class Order_Form extends javax.swing.JFrame {
                         PreparedStatement DBOUTPUT4 = conn.prepareStatement("SELECT price FROM products WHERE productID = ?");
                         DBOUTPUT4.setInt(1, product);
                         ResultSet RS4 = DBOUTPUT4.executeQuery();
-                        String price = null; 
+                        String price = null;
+
                         if(RS4.next())
                         price = RS4.getString("price");
 
                         jLabel9.setText(price);
+
+                        String qty = Quantity_Input.getText();
+                        String dis = Discount_Input.getText();
+                        Double UnPrice = Double.parseDouble(price);
+                        Double total = null; 
+
+                        if((qty.equals("")) && (dis.equals("")))
+                        total = (Double) UnPrice;
+                        else if(dis.equals("")){
+                            Integer qtyInt = Integer.parseInt(qty);
+                            total = (Double) UnPrice * qtyInt;
+                        }
+                        else if(qty.equals("")){
+                            Double disDou = Double.parseDouble(dis);
+                            total = (Double) UnPrice * ((100 - disDou)/100);
+                        }
+
+                        else{
+                            Integer qtyInt = Integer.parseInt(qty);
+                            Double disDou = Double.parseDouble(dis);
+                            total = (Double) UnPrice * qtyInt * ((100 - disDou)/100);
+                        }
+
+                        jLabel1.setText(Double.toString(total));
 
                     }catch(Exception e) {
                         System.out.println(e);
@@ -191,7 +256,7 @@ public class Order_Form extends javax.swing.JFrame {
 
         Product_ID.setText("Product ID");
 
-        Qunatity.setText("Qunatity");
+        Quantity.setText("Quantity");
 
         Order_Files.setText("Order Files");
 
@@ -230,7 +295,7 @@ public class Order_Form extends javax.swing.JFrame {
 
         File.setText("None Selected");
 
-        jLabel1.setText("0.00");
+        jLabel1.setText("0.0");
 
         Order_Status_Input.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No status", "Processing", "Packing", "Transport" }));
 
@@ -266,7 +331,7 @@ public class Order_Form extends javax.swing.JFrame {
 
         jLabel8.setText("Order Due Date ");
 
-        jLabel9.setText("0.00");
+        jLabel9.setText("0.0");
 
         jLabel16.setText("Unit Price");
 
@@ -289,24 +354,20 @@ public class Order_Form extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(216, 216, 216)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Discount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Order_Status, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Order_Files, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Qunatity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Product_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Customer_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Order_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Order_Type, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Total_Price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(Discount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Order_Status, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Order_Files, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Quantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Product_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Customer_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Order_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Order_Type, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Total_Price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
@@ -387,9 +448,7 @@ public class Order_Form extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(363, 363, 363)
-                        .addComponent(Order_Status)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(392, 392, 392)
                         .addComponent(Discount)
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -428,7 +487,7 @@ public class Order_Form extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Quantity_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(Qunatity))
+                            .addComponent(Quantity))
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Search_Button)
@@ -438,7 +497,8 @@ public class Order_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Order_Status_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(Order_Status))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -559,8 +619,8 @@ public class Order_Form extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Order_Type_Input;
     private javax.swing.JLabel Product_ID;
     private javax.swing.JComboBox<String> Product_ID_Input;
+    private javax.swing.JLabel Quantity;
     private javax.swing.JTextField Quantity_Input;
-    private javax.swing.JLabel Qunatity;
     private javax.swing.JButton Reset;
     private javax.swing.JButton Search_Button;
     private javax.swing.JLabel Total_Price;

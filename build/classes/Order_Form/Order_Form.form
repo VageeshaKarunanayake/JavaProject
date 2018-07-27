@@ -27,28 +27,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="216" pref="216" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="Discount" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Order_Status" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Order_Files" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Qunatity" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Product_ID" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Customer_ID" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Order_ID" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Order_Type" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="Total_Price" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="Discount" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Order_Status" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Order_Files" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Quantity" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Product_ID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Customer_ID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Order_ID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="Order_Type" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="Total_Price" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                      <Component id="Description" min="-2" pref="114" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Description" min="-2" pref="114" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -146,9 +139,7 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
-                      <Component id="Order_Status" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="392" max="-2" attributes="0"/>
                       <Component id="Discount" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -194,7 +185,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Quantity_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Qunatity" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Quantity" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -207,6 +198,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Order_Status_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Order_Status" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -259,9 +251,9 @@
         <Property name="text" type="java.lang.String" value="Product ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="Qunatity">
+    <Component class="javax.swing.JLabel" name="Quantity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Qunatity"/>
+        <Property name="text" type="java.lang.String" value="Quantity"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Order_Files">
@@ -339,6 +331,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DocumentListener documentListener = new DocumentListener() {&#xd;&#xa;      public void changedUpdate(DocumentEvent documentEvent) {&#xd;&#xa;       &#xd;&#xa;      }&#xd;&#xa;      public void insertUpdate(DocumentEvent documentEvent) {&#xd;&#xa;       &#xd;&#xa;                    String qty = Quantity_Input.getText();&#xd;&#xa;                    String dis = Discount_Input.getText();&#xd;&#xa;                    String UnP = jLabel9.getText();&#xd;&#xa;                    Double UnPrice = Double.parseDouble(UnP);&#xd;&#xa;                    Double total = null;&#xd;&#xa;&#xd;&#xa;                    if((qty.equals(&quot;&quot;)) &amp;&amp; (dis.equals(&quot;&quot;)))&#xd;&#xa;                            total = (Double) UnPrice;&#xd;&#xa;                    else if(dis.equals(&quot;&quot;)){&#xd;&#xa;                            Integer qtyInt = Integer.parseInt(qty);&#xd;&#xa;                            total = (Double) UnPrice * qtyInt;&#xd;&#xa;                                                }&#xd;&#xa;                    else if(qty.equals(&quot;&quot;)){&#xd;&#xa;                            Double disDou = Double.parseDouble(dis);&#xd;&#xa;                            total = (Double) UnPrice * ((100 - disDou)/100);&#xd;&#xa;                                                }&#xd;&#xa;                    &#xd;&#xa;                    else{&#xd;&#xa;                            Integer qtyInt = Integer.parseInt(qty);&#xd;&#xa;                            Double disDou = Double.parseDouble(dis);&#xd;&#xa;                            total = (Double) UnPrice * qtyInt * ((100 - disDou)/100);&#xd;&#xa;                                                }&#xd;&#xa;&#xd;&#xa;                    jLabel1.setText(Double.toString(total));&#xd;&#xa;                    &#xd;&#xa;      }&#xd;&#xa;      public void removeUpdate(DocumentEvent documentEvent) {&#xd;&#xa;        &#xd;&#xa;      }&#xd;&#xa;    };&#xd;&#xa;&#xd;&#xa;Quantity_Input.getDocument().addDocumentListener(documentListener);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="Search_Button">
       <Properties>
@@ -355,10 +350,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.00"/>
+        <Property name="text" type="java.lang.String" value="0.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Discount_Input">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="Discount_Input.getDocument().addDocumentListener(documentListener);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="Order_Status_Input">
       <Properties>
@@ -440,13 +438,13 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="Product_ID_Input">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="AutoCompleteDecorator.decorate(Product_ID_Input);&#xd;&#xa;&#xd;&#xa;try {&#xd;&#xa;Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/gold_database&quot;, &quot;root&quot; , &quot;1234&quot;);&#xd;&#xa;PreparedStatement DBOUTPUT3 = conn.prepareStatement(&quot;SELECT productID FROM products&quot;);&#xd;&#xa;ResultSet RS3 = DBOUTPUT3.executeQuery();&#xd;&#xa;while(RS3.next()){ &#xd;&#xa;                Product_ID_Input.addItem(RS3.getString(&quot;productID&quot;));&#xd;&#xa;&#x9;&#x9;}&#xd;&#xa;}catch(Exception e) {&#xd;&#xa;&#x9;&#x9;System.out.println(e);&#xd;&#xa;&#x9;}&#xd;&#xa;Product_ID_Input.setSelectedIndex(-1);&#xd;&#xa;&#xd;&#xa;Product_ID_Input.addItemListener(new ItemListener() {&#xd;&#xa;            &#xd;&#xa;            public void itemStateChanged(ItemEvent event) {&#xd;&#xa;                &#xd;&#xa;                if (event.getStateChange() == ItemEvent.SELECTED) {&#xd;&#xa;                    String txt = Product_ID_Input.getSelectedItem().toString();&#xd;&#xa;                    int product = Integer.parseInt(txt);    &#xd;&#xa;                    try {&#xd;&#xa;                    Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/gold_database&quot;, &quot;root&quot; , &quot;1234&quot;);&#xd;&#xa;                    PreparedStatement DBOUTPUT4 = conn.prepareStatement(&quot;SELECT price FROM products WHERE productID = ?&quot;);&#xd;&#xa;                    DBOUTPUT4.setInt(1, product);&#xd;&#xa;                    ResultSet RS4 = DBOUTPUT4.executeQuery();&#xd;&#xa;                    String price = null; &#xd;&#xa;                    if(RS4.next())&#xd;&#xa;                                price = RS4.getString(&quot;price&quot;);&#xd;&#xa;&#xd;&#xa;                    jLabel9.setText(price);&#xd;&#xa;                    &#xd;&#xa;                }catch(Exception e) {&#xd;&#xa;                            System.out.println(e);&#xd;&#xa;                                    }&#xd;&#xa;            }&#xd;&#xa;           }&#xd;&#xa;        });"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="AutoCompleteDecorator.decorate(Product_ID_Input);&#xd;&#xa;&#xd;&#xa;try {&#xd;&#xa;Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/gold_database&quot;, &quot;root&quot; , &quot;1234&quot;);&#xd;&#xa;PreparedStatement DBOUTPUT3 = conn.prepareStatement(&quot;SELECT productID FROM products&quot;);&#xd;&#xa;ResultSet RS3 = DBOUTPUT3.executeQuery();&#xd;&#xa;while(RS3.next()){ &#xd;&#xa;                Product_ID_Input.addItem(RS3.getString(&quot;productID&quot;));&#xd;&#xa;&#x9;&#x9;}&#xd;&#xa;}catch(Exception e) {&#xd;&#xa;&#x9;&#x9;System.out.println(e);&#xd;&#xa;&#x9;}&#xd;&#xa;Product_ID_Input.setSelectedIndex(-1);&#xd;&#xa;&#xd;&#xa;Product_ID_Input.addItemListener(new ItemListener() {&#xd;&#xa;            &#xd;&#xa;            public void itemStateChanged(ItemEvent event) {&#xd;&#xa;                &#xd;&#xa;                if (event.getStateChange() == ItemEvent.SELECTED) {&#xd;&#xa;                    String txt = Product_ID_Input.getSelectedItem().toString();&#xd;&#xa;                    int product = Integer.parseInt(txt);    &#xd;&#xa;                    try {&#xd;&#xa;                    Connection conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/gold_database&quot;, &quot;root&quot; , &quot;1234&quot;);&#xd;&#xa;                    PreparedStatement DBOUTPUT4 = conn.prepareStatement(&quot;SELECT price FROM products WHERE productID = ?&quot;);&#xd;&#xa;                    DBOUTPUT4.setInt(1, product);&#xd;&#xa;                    ResultSet RS4 = DBOUTPUT4.executeQuery();&#xd;&#xa;                    String price = null;&#xd;&#xa;                   &#xd;&#xa;                    if(RS4.next())&#xd;&#xa;                                price = RS4.getString(&quot;price&quot;);&#xd;&#xa;&#xd;&#xa;                    jLabel9.setText(price);&#xd;&#xa;&#xd;&#xa;                    String qty = Quantity_Input.getText();&#xd;&#xa;                    String dis = Discount_Input.getText();&#xd;&#xa;                    Double UnPrice = Double.parseDouble(price);&#xd;&#xa;                    Double total = null; &#xd;&#xa;&#xd;&#xa;                    if((qty.equals(&quot;&quot;)) &amp;&amp; (dis.equals(&quot;&quot;)))&#xd;&#xa;                            total = (Double) UnPrice;&#xd;&#xa;                    else if(dis.equals(&quot;&quot;)){&#xd;&#xa;                            Integer qtyInt = Integer.parseInt(qty);&#xd;&#xa;                            total = (Double) UnPrice * qtyInt;&#xd;&#xa;                                                }&#xd;&#xa;                    else if(qty.equals(&quot;&quot;)){&#xd;&#xa;                            Double disDou = Double.parseDouble(dis);&#xd;&#xa;                            total = (Double) UnPrice * ((100 - disDou)/100);&#xd;&#xa;                                                }&#xd;&#xa;                    &#xd;&#xa;                    else{&#xd;&#xa;                            Integer qtyInt = Integer.parseInt(qty);&#xd;&#xa;                            Double disDou = Double.parseDouble(dis);&#xd;&#xa;                            total = (Double) UnPrice * qtyInt * ((100 - disDou)/100);&#xd;&#xa;                                                }&#xd;&#xa;&#xd;&#xa;                    jLabel1.setText(Double.toString(total));&#xd;&#xa;&#xd;&#xa;                }catch(Exception e) {&#xd;&#xa;                            System.out.println(e);&#xd;&#xa;                                    }&#xd;&#xa;            }&#xd;&#xa;           }&#xd;&#xa;        });"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="0.00"/>
+        <Property name="text" type="java.lang.String" value="0.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
