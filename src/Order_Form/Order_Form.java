@@ -7,6 +7,8 @@ package Order_Form;
 
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import javax.swing.JFileChooser;
 import javax.swing.event.*;
@@ -37,7 +39,6 @@ public class Order_Form extends javax.swing.JFrame {
     private void initComponents() {
 
         Order_ID = new javax.swing.JLabel();
-        Order_Type = new javax.swing.JLabel();
         Customer_ID = new javax.swing.JLabel();
         Product_ID = new javax.swing.JLabel();
         Quantity = new javax.swing.JLabel();
@@ -46,7 +47,6 @@ public class Order_Form extends javax.swing.JFrame {
         Discount = new javax.swing.JLabel();
         Total_Price = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -54,11 +54,6 @@ public class Order_Form extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        Order_Type_Input = new javax.swing.JComboBox<>();
-        AutoCompleteDecorator.decorate(Order_Type_Input);
-        Order_Type_Input.addItem("Selling Order");
-        Order_Type_Input.addItem("Purchasing Order");
-        Order_Type_Input.setSelectedIndex(-1);
         Quantity_Input = new javax.swing.JTextField();
         DocumentListener documentListener = new DocumentListener() {
             public void changedUpdate(DocumentEvent documentEvent) {
@@ -250,8 +245,6 @@ public class Order_Form extends javax.swing.JFrame {
 
         Order_ID.setText("Order ID");
 
-        Order_Type.setText("Order type");
-
         Customer_ID.setText("Customer Name");
 
         Product_ID.setText("Product ID");
@@ -267,8 +260,6 @@ public class Order_Form extends javax.swing.JFrame {
         Total_Price.setText("Total Price");
 
         jLabel2.setText(":-");
-
-        jLabel4.setText(":-");
 
         jLabel7.setText(":-");
 
@@ -364,7 +355,6 @@ public class Order_Form extends javax.swing.JFrame {
                         .addComponent(Product_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Customer_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Order_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Order_Type, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Total_Price, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6)
                     .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -372,7 +362,6 @@ public class Order_Form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel7)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
@@ -401,7 +390,6 @@ public class Order_Form extends javax.swing.JFrame {
                                 .addComponent(File, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Order_Type_Input, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Quantity_Input, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Customer_Name_Input, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -434,7 +422,7 @@ public class Order_Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Order_ID)
@@ -445,10 +433,10 @@ public class Order_Form extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
                         .addComponent(Description))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(392, 392, 392)
+                        .addGap(362, 362, 362)
                         .addComponent(Discount)
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -456,12 +444,7 @@ public class Order_Form extends javax.swing.JFrame {
                             .addComponent(jLabel15))
                         .addGap(133, 133, 133))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Order_Type_Input, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(Order_Type))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Order_Date_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Order_Due_Date_Input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -512,7 +495,7 @@ public class Order_Form extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel17))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Reset, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -540,11 +523,55 @@ public class Order_Form extends javax.swing.JFrame {
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         // TODO add your handling code here:
+        Integer orderID = Integer.parseInt(jLabel18.getText());
+        String orderDes = Description_Input.getText();
+        java.util.Date orderDate = Order_Date_Input.getDate();
+        java.util.Date orderDueDate = Order_Due_Date_Input.getDate();
+        String customerName = Customer_Name_Input.getSelectedItem().toString();
+        String Address = jLabel5.getText();
+        Integer productID = Integer.parseInt(Product_ID_Input.getSelectedItem().toString());
+        String file = File.getText();
+        String orderStatus = Order_Status_Input.getSelectedItem().toString();
+        Double discount = Double.parseDouble(Discount_Input.getText());
+        Double totalPrice = Double.parseDouble(jLabel1.getText());
+        Double unitPrice = Double.parseDouble(jLabel9.getText());
+               
+         try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gold_database", "root" , "1234");
+            
+            FileInputStream fis = null;
+            PreparedStatement DBOUTPUT6 = conn.prepareStatement("INSERT INTO orders VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            DBOUTPUT6.setInt(1, orderID);
+            DBOUTPUT6.setString(2, orderDes);
+            
+            java.sql.Date d1= new java.sql.Date(orderDate.getTime());
+            DBOUTPUT6.setDate(3,d1);
+            
+            java.sql.Date d2= new java.sql.Date(orderDueDate.getTime());
+            DBOUTPUT6.setDate(4,d2);
+            
+            DBOUTPUT6.setString(5, customerName);
+            DBOUTPUT6.setString(6, Address);
+            DBOUTPUT6.setInt(7, productID);
+            
+            File image= new File(file);
+            fis = new FileInputStream(image);
+            DBOUTPUT6.setBinaryStream(8, (InputStream) fis, (int) (image.length()));
+            
+            DBOUTPUT6.setString(9, orderStatus);
+            DBOUTPUT6.setDouble(10, discount);
+            DBOUTPUT6.setDouble(11, totalPrice);
+            DBOUTPUT6.setDouble(12, unitPrice);
+            
+            DBOUTPUT6.executeUpdate();
+            
+        }catch(Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_AddActionPerformed
 
     private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
         // TODO add your handling code here:
-        Order_Type_Input.setSelectedIndex(-1);
         Order_Date_Input.setDate(null);
         Order_Due_Date_Input.setDate(null);
         Customer_Name_Input.setSelectedIndex(-1);
@@ -615,8 +642,6 @@ public class Order_Form extends javax.swing.JFrame {
     private javax.swing.JLabel Order_ID;
     private javax.swing.JLabel Order_Status;
     private javax.swing.JComboBox<String> Order_Status_Input;
-    private javax.swing.JLabel Order_Type;
-    private javax.swing.JComboBox<String> Order_Type_Input;
     private javax.swing.JLabel Product_ID;
     private javax.swing.JComboBox<String> Product_ID_Input;
     private javax.swing.JLabel Quantity;
@@ -640,7 +665,6 @@ public class Order_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

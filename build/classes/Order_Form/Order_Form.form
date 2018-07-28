@@ -37,7 +37,6 @@
                       <Component id="Product_ID" alignment="0" max="32767" attributes="0"/>
                       <Component id="Customer_ID" alignment="0" max="32767" attributes="0"/>
                       <Component id="Order_ID" alignment="0" max="32767" attributes="0"/>
-                      <Component id="Order_Type" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                       <Component id="Total_Price" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -47,7 +46,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
@@ -80,7 +78,6 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="Search_Button" min="-2" pref="98" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="Order_Type_Input" alignment="0" max="32767" attributes="0"/>
                           <Component id="Quantity_Input" alignment="0" max="32767" attributes="0"/>
                           <Component id="Customer_Name_Input" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -121,7 +118,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="93" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Order_ID" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -135,11 +132,11 @@
                       <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Description" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="392" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="362" max="-2" attributes="0"/>
                       <Component id="Discount" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -149,13 +146,7 @@
                       <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Order_Type_Input" alignment="3" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Order_Type" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Order_Date_Input" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Order_Due_Date_Input" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -215,7 +206,7 @@
                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="46" max="32767" attributes="0"/>
+                              <EmptySpace pref="47" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="Add" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                                   <Component id="Reset" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
@@ -234,11 +225,6 @@
     <Component class="javax.swing.JLabel" name="Order_ID">
       <Properties>
         <Property name="text" type="java.lang.String" value="Order ID"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Order_Type">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Order type"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Customer_ID">
@@ -281,11 +267,6 @@
         <Property name="text" type="java.lang.String" value=":-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=":-"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value=":-"/>
@@ -320,12 +301,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value=":-"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="Order_Type_Input">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="AutoCompleteDecorator.decorate(Order_Type_Input);&#xd;&#xa;Order_Type_Input.addItem(&quot;Selling Order&quot;);&#xd;&#xa;Order_Type_Input.addItem(&quot;Purchasing Order&quot;);&#xd;&#xa;Order_Type_Input.setSelectedIndex(-1);"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="Quantity_Input">
       <Properties>
